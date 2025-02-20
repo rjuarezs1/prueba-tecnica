@@ -23,16 +23,17 @@ generate_random_products();
 // *middleware que permite recuperar el body del request en formato json
 app.use(express.json());
 // *dependencia dev que permite mostrar via línea de comandos las respuestas del servidor sobre las peticiones que recibe
+app.use(cookieParser());
 app.use(morgan("tiny"));
 // *dependencia necesaria para habilitar los dominios (cors) que solicitan recursos al servidor
 app.use(
   cors({
     origin: urlOrigin,
+    credentials: true,
   })
 );
 
 // *middleware que permite recuperar las cookies provenientes de lado del cliente
-app.use(cookieParser());
 
 // RUTAS DE LA API REST
 app.use("/api/v1", authRoutes);
